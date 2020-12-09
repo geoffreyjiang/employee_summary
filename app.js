@@ -35,7 +35,7 @@ const render = require("./lib/htmlRenderer");
 // for the provided `render` function to work! ```
 
 
-function managerQ () {
+function questions () {
     inquirer.prompt([
         {
             type: "input",
@@ -56,7 +56,35 @@ function managerQ () {
             type: "list",
             name: "role",
             message: "Choose Role",
-            choices: ["Intern", "Manager", "Engineer"]
-        }
-    ])
-}
+            choices: ["Manager", "Intern", "Engineer"]
+        },
+    ]) .then((data)) = async () => {
+        if (data.role === "Manager") {
+            inquirer.prompt([
+                {
+                    type: "input",
+                    name: "officeNum",
+                    message: "Enter Office Number"
+                }
+            ])
+        } else if (data.role === "Intern") 
+            {
+                await inquirer.prompt([
+                    {
+                        type: "input",
+                        name: "school",
+                        message: "Enter School Name"
+                    }
+                ])
+                
+            } else (data.role === "Engineer")
+            {
+                await inquirer.prompt ([
+                    {
+                        type: "input",
+                        name: "github",
+                        message: "Enter GitHub Username",
+                    }
+                ])
+            }
+    }}
