@@ -1,6 +1,6 @@
-const Manager = require("./lib/Manager");
-const Engineer = require("./lib/Engineer");
-const Intern = require("./lib/Intern");
+const Manager = require("lib/Manager.js");
+const Engineer = require("lib/Engineer.js");
+const Intern = require("lib/Intern.js");
 const inquirer = require("inquirer");
 const path = require("path");
 const fs = require("fs");
@@ -33,3 +33,30 @@ const render = require("./lib/htmlRenderer");
 // for further information. Be sure to test out each class and verify it generates an
 // object with the correct structure and methods. This structure will be crucial in order
 // for the provided `render` function to work! ```
+
+
+function managerQ () {
+    inquirer.prompt([
+        {
+            type: "input",
+            name: "name",
+            message: "Enter Full Name"
+        },
+        {
+            type: "input",
+            name: "email",
+            message: "Enter Email"
+        },
+        {
+            type: "input",
+            name: "id",
+            message: "Enter Employee ID"
+        },
+        {
+            type: "list",
+            name: "role",
+            message: "Choose Role",
+            choices: ["Intern", "Manager", "Engineer"]
+        }
+    ])
+}
