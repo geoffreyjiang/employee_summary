@@ -58,9 +58,9 @@ async function employeeInfo () {
                     name: "officeNumber",
                     message: "Enter Office Number"
                 }
-            ]).then((res) => {
-                console.log(res);
-                const manager = new Manager(res.name, res.id, res.email, res.officeNumber)
+            ]).then((role) => {
+                console.log(role);
+                const manager = new Manager(res.name, res.id, res.email, role.officeNumber)
                 teamMembers.push(manager);
                 addMember();
                 writeResp();
@@ -72,9 +72,9 @@ async function employeeInfo () {
                     name: "school",
                     message: "Enter School Name"
                 }
-            ]).then((res) => {
-                console.log(res);
-                const intern = new Intern (res.name, res.id, res.email, res.school);
+            ]).then((role) => {
+                console.log(role);
+                const intern = new Intern (res.name, res.id, res.email, role.school);
                 teamMembers.push(intern);
                 addMember();
                 writeResp();
@@ -86,9 +86,9 @@ async function employeeInfo () {
                         name: "github",
                         message: "Enter Github Link"
                     }
-            ]).then((res) => {
-                console.log(res);
-                const engineer = new Engineer (res.name, res.id, res.email, res.github);
+            ]).then((role) => {
+                console.log(role);
+                const engineer = new Engineer (res.name, res.id, res.email, role.github);
                 teamMembers.push(engineer);
                 addMember();
                 writeResp();  
@@ -96,6 +96,7 @@ async function employeeInfo () {
         }
     })
 }
+
 employeeInfo();
 
 function writeResp () {
@@ -103,6 +104,6 @@ function writeResp () {
     if (err) {
     return console.log(err);
     }
-    console.log("\n Adding Info Done");
+    console.log("\n Team Member Added");
     })
 }
