@@ -11,22 +11,6 @@ const Employee = require("./lib/Employee");
 const teamMembers = [];
 
 
-function addMember() {
-    inquirer.prompt([
-    {
-        type: "list",
-        message: "Add Employee?",
-        name: "addEmployee",
-        choices: ["Yes", "No"]
-    }]).then((ans) => {
-        if (ans.addEmployee === "Yes"){
-        employeeInfo();
-        } else {
-        writeResp();
-        return "Done!";
-        }
-    })
-}
 async function employeeInfo () {
     await inquirer.prompt([
         {
@@ -98,6 +82,23 @@ async function employeeInfo () {
 }
 
 employeeInfo();
+
+function addMember() {
+    inquirer.prompt([
+    {
+        type: "list",
+        message: "Add Employee?",
+        name: "addEmployee",
+        choices: ["Yes", "No"]
+    }]).then((ans) => {
+        if (ans.addEmployee === "Yes"){
+        employeeInfo();
+        } else {
+        writeResp();
+        return "Done!";
+        }
+    })
+}
 
 function writeResp () {
     fs.writeFile(outputPath, render(teamMembers), function (err) {

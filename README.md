@@ -24,7 +24,7 @@
     3. Run node app.js
     4. Follow prompts
   ## Tests
-    coming soon
+   <img src="assets/images/employee_sum_gen.gif"
   ## Contributors
     Geoffrey Jiang  
   ## License
