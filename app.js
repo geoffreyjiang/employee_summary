@@ -10,8 +10,25 @@ const render = require("./lib/htmlRenderer");
 const Employee = require("./lib/Employee");
 const teamMembers = [];
 
-async function employeeInfo () {
+
+function addMember() {
     inquirer.prompt([
+    {
+        type: "list",
+        message: "Add Employee?",
+        name: "addEmployee",
+        choices: ["Yes", "No"]
+    }]).then((ans) => {
+        if (ans.addEmployee === "Yes"){
+        employeeInfo();
+        } else {
+        output();
+        return "Done!";
+        }
+    })
+}
+async function employeeInfo () {
+    await inquirer.prompt([
         {
             type: "input",
             name: "name",
@@ -33,71 +50,53 @@ async function employeeInfo () {
             message: "Choose Role",
             choices: ["Manager", "Intern", "Engineer"]
         },
-    ]) .then((res) => {
+    ]).then((res) => {
         if (res.role === "Manager") {
             inquirer.prompt([
                 {
                     type: "input",
                     name: "officeNumber",
-                    message: "Enter Office Number",
+                    message: "Enter Office Number"
                 }
-            ]) 
-        } (res =>{
-            addMember();
-            console.log(res);
-            const manager = new Manager(res.name, res.id, res.email, res.officeNumber)
-            teamMembers.push(employeeInfo);
-            output();
-        })
-            if (res.role === "Intern") {
+            ]).then((res) => {
+                console.log(res);
+                const manager = new Manager(res.name, res.id, res.email, res.officeNumber)
+                teamMembers.push(manager);
+                addMember();
+                output();
+            })
+        } else if (res.role === "Intern") {
             inquirer.prompt([
                 {
                     type: "input",
                     name: "school",
                     message: "Enter School Name"
                 }
-        ])} (res =>{
-            console.log(res);
-            const intern = new Intern (res.name, res.id, res.email, res.school);
-            teamMembers.push(employeeInfo);
-            addMember();
-            output();
-        }) 
-            if (res.role === "Engineer") {
-                inquirer.prompt([
+            ]).then((res) => {
+                console.log(res);
+                const intern = new Intern (res.name, res.id, res.email, res.school);
+                teamMembers.push(intern);
+                addMember();
+                output();
+            }) 
+        } else if (res.role === "Engineer") {
+            inquirer.prompt([
                     {
                         type: "input",
-                        name: "github",
+                        name: "githubrepo",
                         message: "Enter Github Link"
                     }
-        ])} (res => {
-            console.log(res);
-            const engineer = new Engineer (res.name. res.id, res.email, res.github);
-            teamMembers.push(employeeInfo);
-            addMember();
-            output();  
-        })
+            ]).then((res) => {
+                console.log(res);
+                const engineer = new Engineer (res.name, res.id, res.email, res.githubrepo);
+                teamMembers.push(engineer);
+                addMember();
+                output();  
+            })
+        }
     })
 }
-
-async function addMember () {
-    inquirer.prompt([
-    {
-        type: "confirm",
-        message: "Add Employee?",
-        name: "addEmployee",
-    default: true
-    }]) .then((ans) => {
-    if (ans.addEmployee === true){
-    employeeInfo();
-    } else {
-    output();
-    return "Done!";
-    }
-})
-}
-employeeInfo()
-
+employeeInfo();
 function output () {
     fs.writeFile(outputPath, render(teamMembers), function (err) {
     if (err) {
