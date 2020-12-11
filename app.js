@@ -83,12 +83,12 @@ async function employeeInfo () {
             inquirer.prompt([
                     {
                         type: "input",
-                        name: "githubrepo",
+                        name: "github",
                         message: "Enter Github Link"
                     }
             ]).then((res) => {
                 console.log(res);
-                const engineer = new Engineer (res.name, res.id, res.email, res.githubrepo);
+                const engineer = new Engineer (res.name, res.id, res.email, res.github);
                 teamMembers.push(engineer);
                 addMember();
                 output();  
@@ -97,6 +97,7 @@ async function employeeInfo () {
     })
 }
 employeeInfo();
+
 function output () {
     fs.writeFile(outputPath, render(teamMembers), function (err) {
     if (err) {
