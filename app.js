@@ -103,6 +103,6 @@ function output () {
     if (err) {
     return console.log(err);
     }
-    console.log("Success!");
+    console.log("\n Added Info");
     })
 }
