@@ -23,7 +23,7 @@ function addMember () {
     default: true
     }]) .then((ans) => {
     if (ans.confirmEmployee === true){
-    inputEmployee();
+    employeeInfo();
     } else {
     output();
     return "Done!";
@@ -100,13 +100,14 @@ function employeeInfo () {
         })
 }
 }
+employeeInfo();
 
     function output () {
         fs.writeFile(outputPath, render(teamMembers), function (err) {
         if (err) {
         return console.log(err);
         }
-        console.log("Success!");
+        console.log("Done!");
         })
     }
 
