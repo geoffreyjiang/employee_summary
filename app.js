@@ -22,7 +22,7 @@ function addMember() {
         if (ans.addEmployee === "Yes"){
         employeeInfo();
         } else {
-        output();
+        writeResp();
         return "Done!";
         }
     })
@@ -63,7 +63,7 @@ async function employeeInfo () {
                 const manager = new Manager(res.name, res.id, res.email, res.officeNumber)
                 teamMembers.push(manager);
                 addMember();
-                output();
+                writeResp();
             })
         } else if (res.role === "Intern") {
             inquirer.prompt([
@@ -77,7 +77,7 @@ async function employeeInfo () {
                 const intern = new Intern (res.name, res.id, res.email, res.school);
                 teamMembers.push(intern);
                 addMember();
-                output();
+                writeResp();
             }) 
         } else if (res.role === "Engineer") {
             inquirer.prompt([
@@ -91,18 +91,18 @@ async function employeeInfo () {
                 const engineer = new Engineer (res.name, res.id, res.email, res.github);
                 teamMembers.push(engineer);
                 addMember();
-                output();  
+                writeResp();  
             })
         }
     })
 }
 employeeInfo();
 
-function output () {
+function writeResp () {
     fs.writeFile(outputPath, render(teamMembers), function (err) {
     if (err) {
     return console.log(err);
     }
-    console.log("\n Added Info");
+    console.log("\n Adding Info Done");
     })
 }
